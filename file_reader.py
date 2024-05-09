@@ -9,16 +9,15 @@ def read_local_file(file_name, local_file_path):
     extension = os.path.splitext(file_name)[1].lower()
     
     try:
-        # Read common text-based programming files
         if extension in ['.txt', '.py', '.js', '.html', '.css', '.java', '.cpp', '.c', '.sh', '.md', '.json']:
             with open(full_path, 'r', encoding='utf-8') as file:
                 content = file.read()
-                return content[:2000]  # Return only the first 2000 characters
+                return content[:4000]  # Return number of characters
 
         elif extension == '.csv':
             with open(full_path, mode='r', encoding='utf-8') as file:
                 csv_reader = csv.DictReader(file)
-                return list(csv_reader)  # Convert to list to make it easier to process
+                return list(csv_reader) 
         
         elif extension in ['.jpg', '.jpeg', '.png', '.gif', '.bmp']:
             with open(full_path, 'rb') as file:
