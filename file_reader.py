@@ -3,8 +3,9 @@ import os
 import json
 import csv
 import base64
+from config import character_limit, local_file_path
 
-def read_local_file(file_name, local_file_path):
+def read_local_file(file_name):
     full_path = os.path.join(local_file_path, file_name)
     extension = os.path.splitext(file_name)[1].lower()
     
@@ -12,7 +13,7 @@ def read_local_file(file_name, local_file_path):
         if extension in ['.txt', '.py', '.js', '.html', '.css', '.java', '.cpp', '.c', '.sh', '.md', '.json']:
             with open(full_path, 'r', encoding='utf-8') as file:
                 content = file.read()
-                return content[:4000]  # Return number of characters
+                return content[:character_limit]  # Use character limit from config
 
         elif extension == '.csv':
             with open(full_path, mode='r', encoding='utf-8') as file:
