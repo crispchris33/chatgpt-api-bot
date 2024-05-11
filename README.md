@@ -1,15 +1,13 @@
 # chatgpt-api-bot
 
-Dependencies:
+This chatbot project is designed to interact with users, read files from a specified directory, and utilize OpenAI's models to process various inputs. It supports reading plain text, JSON, CSV, programming files, and image files, among others.
 
-langchain
-langchain-openai
-python-dotenv
-openai
+## Dependencies
 
-# Chatbot Project
-
-This chatbot project is designed to interact with users, read files from a specified directory, and utilize OpenAI's models for processing various inputs. It supports reading plain text, JSON, CSV, and programming files, among others.
+- langchain
+- langchain-openai
+- python-dotenv
+- openai
 
 ## Getting Started
 
@@ -19,72 +17,70 @@ Follow these steps to set up and run the chatbot project on your local machine.
 
 Ensure you have Python installed on your machine. This project requires Python 3.7 or higher.
 
-# Installation
+### Installation
 
-Clone the Repository
+1. Clone the Repository
+   Alternatively, you can download the ZIP file of the project and extract it.
 
-Otherwise, you can download the ZIP file of the project and extract it.
-Set Up a Virtual Environment by running:
+2. Set Up a Virtual Environment
 
-On macOS and Linux:
+   On macOS and Linux:
+   python3 -m venv env
+   source env/bin/activate
 
-python3 -m venv env
-source env/bin/activate
+   On Windows:
+   python -m venv env
+   .\env\Scripts\activate
 
-On Windows:
+3. Install Dependencies
 
-python -m venv env
-.\env\Scripts\activate
+   Install the required Python packages by running:
+   pip install -r requirements.txt
 
-# Install Dependencies
+### Configuration
 
-Install the required Python packages by running:
+1. Environment Variables
 
-pip install -r requirements.txt
+   Create a .env file in the root directory of your project and add your OpenAI API key and the local file path from which the bot should read files:
+   OPENAI_API_KEY=your_openai_api_key_here
+   LOCAL_FILE_PATH=your_file_directory_path_here
+   CHARACTER_LIMIT=4000
+   CHATGPT_MODEL_VERSION=gpt-3.5-turbo
 
-# Configuration
+   Replace your_openai_api_key_here with your actual OpenAI API key and your_file_directory_path_here with the full path to the directory containing the files you want the bot to read.
 
-Environment Variables
+   Note: There is also an example .env file provided. Change the name to ".env" when ready to use.
 
-Create a .env file in the root directory of your project and add your OpenAI API key and the local file path from which the bot should read files:
-
-OPENAI_API_KEY=your_openai_api_key_here
-LOCAL_FILE_PATH=your_file_directory_path_here
-
-**There is also an example env file provided but change the name to ".env" when ready to use.
-
-Replace your_openai_api_key_here with your actual OpenAI API key and your_file_directory_path_here with the full path to the directory containing the files you want the bot to read.
-
-# Usage
+### Usage
 
 To run the chatbot, execute the following command in the root directory of your project:
 
 python main.py
 
-# Interacting with the Chatbot
+### Interacting with the Chatbot
 
-Once the chatbot is running, you can interact with it by typing messages. Here are some things you can do:
+Once the chatbot is running, you can interact with it by typing messages. Here are some examples of what you can do:
 
-General Conversation:
+#### General Conversation
 
 Just type your message and get a response. For example:
 
 You: Hello, how are you?
 
-Read Files:
+#### Read Files
 
-To read a file, use the command read file followed by the file name. For example:
+To read one or more files, use the command read files followed by the file names. For example:
 
-You: read file example.txt
+You: read files example.txt options.html
 
-This will display the content of example.txt.
+This will display the content of example.txt and options.html.
 
-# Supported File Types
+### Supported File Types
 
-The chatbot can read the following types of files:
+The chatbot can read and process the following types of files:
 
-Plain text files (.txt)
-Programming files (.py, .js, .html, .css, .java, .cpp, .c, .sh, .md)
-JSON files (.json)
-CSV files (.csv)
-Image files (.jpg, .jpeg, .png, .gif, .bmp) as base64 strings
+- Plain text files (.txt)
+- Programming files (.py, .js, .html, .css, .java, .cpp, .c, .sh, .md)
+- JSON files (.json)
+- CSV files (.csv)
+- Image files (.jpg, .jpeg, .png, .gif, .bmp) - displayed as base64 strings

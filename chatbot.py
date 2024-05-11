@@ -1,8 +1,7 @@
 # chatbot.py
 from langchain_core.messages import HumanMessage, AIMessage
 from langchain.memory import ChatMessageHistory
-from config import local_file_path
-from file_reader import read_local_file  # Import from file_reader.py
+from file_reader import read_local_files
 from chat_model import get_chat_model
 
 chat_model = get_chat_model()
@@ -11,17 +10,16 @@ chat_history = ChatMessageHistory()
 def handle_chat(user_input):
     chat_history.add_user_message(HumanMessage(content=user_input))
     
-    if user_input.lower().startswith("read file "):
-        file_name = user_input[len("read file "):].strip()
-        file_content = read_local_file(file_name, local_file_path)
+    if user_input.lower().startswith("read files"):
+        file_names = user_input.split()[2:]
+        files_content = read_local_files(file_names)
         
-        if isinstance(file_content, (dict, list)):
-            file_content_str = json.dumps(file_content, indent=2)
-        else:
-            file_content_str = str(file_content)
-        
-        chat_history.add_ai_message(AIMessage(content=file_content_str))
-        return file_content_str
+        response = []
+        for file_name, content in files_content.items():
+            response.append(f"Content of {file_name}:\n{content}\n")
+        response_text = "\n".join(response)
+        chat_history.add_ai_message(AIMessage(content=response_text))
+        return response_text
     
     try:
         messages = chat_history.messages
